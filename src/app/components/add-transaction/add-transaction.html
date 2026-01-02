@@ -32,9 +32,24 @@
       <label>Nota (Opcional)</label>
       <input type="text" [(ngModel)]="model.description" name="description" placeholder="Detalles adicionales...">
     </div>
-
-    <button type="submit" class="btn-save">
-      Guardar Movimiento
-    </button>
+    
+    <div class="card-style form-container">
+      <div class="header">
+        <h2>{{ model.id ? 'Editar Transacción' : 'Nueva Transacción' }}</h2>
+        <span class="emoji-header">{{ model.id ? '✏️' : '💸' }}</span>
+      </div>
+      
+      <form (ngSubmit)="onSubmit()">
+        <button type="submit" class="btn-save">
+          {{ model.id ? 'Actualizar Movimiento' : 'Guardar Movimiento' }}
+        </button>
+        
+        @if (model.id) {
+          <button type="button" (click)="resetForm()" style="width:100%; margin-top:10px; background:#9ca3af; border:none; padding:10px; border-radius:10px; color:white; font-weight:bold;">
+            Cancelar Edición
+          </button>
+        }
+      </form>
+    </div>
   </form>
 </div>

@@ -1,8 +1,9 @@
-import { Component, inject, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, inject, Input, OnChanges, SimpleChanges, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common'; // Importante para pipes como currency y date
 import { TransactionService } from '../../services/transaction';
 import { Observable } from 'rxjs';
 import { Transaction } from '../../models/transaction.model';
+import Swal from 'sweetalert2'; // Importamos SweetAlert
 
 @Component({
   selector: 'app-transaction-list',
@@ -12,7 +13,8 @@ import { Transaction } from '../../models/transaction.model';
   styleUrl: './transaction-list.scss'
 })
 export class TransactionListComponent implements OnChanges {
-  @Input() userId!: string; // <--- Recibimos el ID
+  @Input() userId!: string;
+  @Output() onEdit = new EventEmitter<Transaction>(); // Nuevo evento
   private transactionService = inject(TransactionService);
   
   transactions$: Observable<Transaction[]> | undefined; // Puede ser undefined al inicio
@@ -26,15 +28,30 @@ export class TransactionListComponent implements OnChanges {
 
   async deleteItem(id: string | undefined) {
     if (!id) return;
-    const confirm = window.confirm('¿Seguro que quieres eliminar este movimiento?');
-    if (confirm) {
+
+    const result = await Swal.fire({
+      title: '¿Eliminar movimiento?',
+      text: "No podrás recuperar esta información",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#ef4444', // Rojo
+      cancelButtonColor: '#3085d6', // Azul
+      confirmButtonText: 'Sí, borrar',
+      cancelButtonText: 'Cancelar'
+    });
+
+    if (result.isConfirmed) {
       try {
         await this.transactionService.deleteTransaction(id);
-        // No necesitas recargar, el Observable actualiza la lista solo
+        Swal.fire('¡Eliminado!', 'El movimiento ha sido borrado.', 'success');
       } catch (error) {
-        console.error(error);
-        alert('Error al eliminar');
+        Swal.fire('Error', 'No se pudo eliminar', 'error');
       }
     }
+  }
+
+  // Nueva función para emitir el evento de editar
+  editItem(item: Transaction) {
+    this.onEdit.emit(item);
   }
 }

@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { AuthService } from '../../services/auth';
 import { AddTransactionComponent } from '../../components/add-transaction/add-transaction';
 import { TransactionListComponent } from '../../components/transaction-list/transaction-list';
+import { Transaction } from '../../models/transaction.model'; // Importar modelo
 
 @Component({
   selector: 'app-dashboard',
@@ -18,11 +19,18 @@ import { TransactionListComponent } from '../../components/transaction-list/tran
 
         <div class="content-grid">
           <div class="left-panel">
-            <app-add-transaction [userId]="user.uid"></app-add-transaction>
+            <app-add-transaction 
+              [userId]="user.uid" 
+              [transactionToEdit]="editingTransaction"
+              (onClear)="editingTransaction = null">
+            </app-add-transaction>
           </div>
           
           <div class="right-panel">
-            <app-transaction-list [userId]="user.uid"></app-transaction-list>
+            <app-transaction-list 
+              [userId]="user.uid"
+              (onEdit)="setTransactionToEdit($event)">
+            </app-transaction-list>
           </div>
         </div>
       }
@@ -40,4 +48,11 @@ import { TransactionListComponent } from '../../components/transaction-list/tran
 })
 export class DashboardComponent {
   auth = inject(AuthService);
+  editingTransaction: Transaction | null = null; // Variable para guardar el dato
+
+  setTransactionToEdit(transaction: Transaction) {
+    this.editingTransaction = transaction;
+    // Scroll suave hacia arriba en móvil para ver el formulario
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
 }
