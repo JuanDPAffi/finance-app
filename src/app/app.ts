@@ -1,25 +1,30 @@
 import { Component, inject } from '@angular/core';
-import { CommonModule } from '@angular/common'; // <--- Importante
-import { AddTransactionComponent } from './components/add-transaction/add-transaction';
-import { TransactionListComponent } from './components/transaction-list/transaction-list';
-import { AuthService } from './services/auth'; // <--- Importar servicio
+import { CommonModule } from '@angular/common';
+// 1. IMPORTAR ESTO:
+import { Router, RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
+import { AuthService } from './services/auth'; // Asegúrate que la ruta sea correcta
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, AddTransactionComponent, TransactionListComponent],
+  imports: [CommonModule, RouterOutlet, RouterLink, RouterLinkActive], 
   templateUrl: './app.html',
-  styleUrl: './app.scss'
+  styleUrls: ['./app.scss'] // <-- fix: plural
 })
 export class App {
-  authService = inject(AuthService); // <--- Inyectar
-  
-  // Helpers para usar en el HTML
+  authService = inject(AuthService);
+  router = inject(Router); // <-- inject Router
+
   login() {
     this.authService.login().catch(error => console.error(error));
   }
 
-  logout() {
-    this.authService.logout();
+  async logout() {                      // <-- make it async for clarity
+    try {
+      await this.authService.logout();
+      this.router.navigate(['/login']); // <-- replace stray `redirect`
+    } catch (err) {
+      console.error(err);
+    }
   }
 }

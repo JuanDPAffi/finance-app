@@ -25,7 +25,16 @@
               {{ item.amount | currency:'COP':'symbol-narrow':'1.0-0' }}
             </div>
           </div>
-
+          <div class="transaction-row">
+            <div class="actions-group" style="display: flex; align-items: center; gap: 10px;">
+                <div class="amount" [class.expense-text]="item.type === 'expense'">
+                  </div>
+                
+                <button (click)="deleteItem(item.id)" class="btn-icon delete" title="Eliminar">
+                  🗑️
+                </button>
+            </div>
+          </div>
         }
       </div>
     } @else {

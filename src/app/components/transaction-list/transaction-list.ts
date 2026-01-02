@@ -23,4 +23,18 @@ export class TransactionListComponent implements OnChanges {
       this.transactions$ = this.transactionService.getTransactions(this.userId);
     }
   }
+
+  async deleteItem(id: string | undefined) {
+    if (!id) return;
+    const confirm = window.confirm('¿Seguro que quieres eliminar este movimiento?');
+    if (confirm) {
+      try {
+        await this.transactionService.deleteTransaction(id);
+        // No necesitas recargar, el Observable actualiza la lista solo
+      } catch (error) {
+        console.error(error);
+        alert('Error al eliminar');
+      }
+    }
+  }
 }

@@ -82,3 +82,15 @@
   padding: 1rem;
   color: #6b7280;
 }
+
+.btn-icon {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.2rem;
+  opacity: 0.5;
+  transition: opacity 0.2s;
+  
+  &:hover { opacity: 1; transform: scale(1.1); }
+  &.delete:hover { filter: hue-rotate(45deg); /* Efecto rojizo */ }
+}

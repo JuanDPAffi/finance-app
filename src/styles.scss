@@ -1,1 +1,81 @@
-/* You can add global styles to this file, and also import other style files */
+/* --- VARIABLES Y FUENTES --- */
+:root {
+  --primary: #4f46e5; /* Índigo elegante */
+  --primary-hover: #4338ca;
+  --bg-color: #f3f4f6;
+  --text-dark: #1f2937;
+  --text-light: #6b7280;
+  --danger: #ef4444;
+  --success: #10b981;
+}
+
+body {
+  font-family: 'Inter', 'Segoe UI', Roboto, sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-dark);
+  margin: 0;
+  padding: 0; /* Quitamos padding del body para que el navbar toque los bordes */
+}
+
+/* --- UTILIDADES GLOBALES --- */
+.card-style {
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  padding: 1.5rem;
+}
+
+/* --- BOTONES --- */
+button { cursor: pointer; transition: all 0.2s; }
+
+.btn-save {
+  width: 100%;
+  padding: 0.875rem;
+  background-color: var(--primary);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 600;
+  
+  &:hover { background-color: var(--primary-hover); transform: translateY(-1px); }
+}
+
+/* Estilos del botón Google (Global para que Login lo vea) */
+.btn-google {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  width: 100%;
+  background-color: white;
+  color: #3c4043;
+  border: 1px solid #dadce0;
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  font-weight: 500;
+  
+  &:hover { background-color: #f8faff; border-color: #d2e3fc; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+  .google-logo { width: 20px; height: 20px; }
+}
+
+/* --- INPUTS Y FORMULARIOS --- */
+input, select {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  font-size: 1rem;
+  background-color: #f9fafb;
+  box-sizing: border-box;
+  &:focus { outline: none; border-color: var(--primary); background: white; }
+}
+
+label {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text-light);
+  margin-bottom: 0.5rem;
+}
