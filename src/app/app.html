@@ -20,6 +20,7 @@
     @if (authService.user$ | async; as user) {
       <div class="dashboard-grid">
         <app-add-transaction [userId]="user.uid"></app-add-transaction>
+        <br>
         <app-transaction-list [userId]="user.uid"></app-transaction-list>
       </div>
 
