@@ -1,0 +1,31 @@
+.list-container {
+  margin-top: 2rem;
+  padding: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+.transaction-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+
+  // Por defecto verde (ingreso)
+  border-left: 5px solid #2ecc71; 
+  
+  &.expense {
+    // Si es gasto, rojo
+    border-left-color: #e74c3c; 
+  }
+}
+
+.amount {
+  font-weight: bold;
+}

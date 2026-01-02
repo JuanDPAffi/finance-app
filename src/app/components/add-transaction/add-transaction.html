@@ -1,0 +1,31 @@
+<div class="container">
+  <h2>Nueva Transacción</h2>
+  
+  <form (ngSubmit)="onSubmit()">
+    
+    <div>
+      <label>Tipo:</label>
+      <select [(ngModel)]="model.type" name="type">
+        <option value="income">Ingreso 💰</option>
+        <option value="expense">Gasto 💸</option>
+      </select>
+    </div>
+
+    <div>
+      <label>Monto:</label>
+      <input type="number" [(ngModel)]="model.amount" name="amount" placeholder="0.00" required>
+    </div>
+
+    <div>
+      <label>Categoría:</label>
+      <input type="text" [(ngModel)]="model.category" name="category" placeholder="Ej: Casa, Supermercado">
+    </div>
+
+    <div>
+      <label>Descripción:</label>
+      <input type="text" [(ngModel)]="model.description" name="description" placeholder="Detalles opcionales">
+    </div>
+
+    <button type="submit">Guardar Transacción</button>
+  </form>
+</div>
