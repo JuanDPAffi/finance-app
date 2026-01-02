@@ -1,28 +1,45 @@
-<div class="list-container">
-  <h3>Historial de Movimientos</h3>
+<div class="card-style list-container">
+  <h3>Historial Reciente</h3>
 
   @if (transactions$ | async; as transactions) {
     
     @if (transactions.length > 0) {
-      <ul>
+      <div class="transactions-wrapper">
         @for (item of transactions; track item.id) {
-          <li class="transaction-item" [class.expense]="item.type === 'expense'">
+          
+          <div class="transaction-row">
+            <div class="icon-indicator" [class.expense]="item.type === 'expense'">
+              {{ item.type === 'expense' ? '📉' : '📈' }}
+            </div>
+
             <div class="info">
               <span class="category">{{ item.category }}</span>
-              <small>{{ item.description }}</small>
+              <span class="date-desc">
+                {{ item.description || 'Sin descripción' }} 
+                • {{ item.date?.toDate() | date:'shortDate' }}
+              </span>
             </div>
             
-            <div class="amount">
+            <div class="amount" [class.expense-text]="item.type === 'expense'">
+              {{ item.type === 'expense' ? '-' : '+' }}
               {{ item.amount | currency:'COP':'symbol-narrow':'1.0-0' }}
             </div>
-          </li>
+          </div>
+
         }
-      </ul>
+      </div>
     } @else {
-      <p>No hay movimientos aún. ¡Agrega uno arriba!</p>
+      <div class="empty-state">
+        <span class="empty-icon">📭</span>
+        <p>Aún no tienes movimientos.</p>
+        <small>¡Registra el primero arriba!</small>
+      </div>
     }
 
   } @else {
-    <p>Cargando datos...</p>
+    <div class="loading">
+      <div class="spinner"></div>
+      <p>Cargando tus finanzas...</p>
+    </div>
   }
 </div>

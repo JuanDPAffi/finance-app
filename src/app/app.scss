@@ -1,0 +1,142 @@
+/* --- CONTENEDOR PRINCIPAL --- */
+.app-container {
+  max-width: 800px; /* Un poco más ancho para que respire */
+  margin: 0 auto;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* --- HEADER --- */
+.app-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 0;
+  margin-bottom: 1.5rem;
+  
+  /* Opcional: Si quieres que el header se quede fijo arriba */
+  /* position: sticky; top: 0; background: #f3f4f6; z-index: 10; */
+
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+
+    h1 {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: #111827;
+      margin: 0;
+      letter-spacing: -0.5px;
+    }
+    
+    .logo-icon { font-size: 1.5rem; }
+  }
+}
+
+/* --- PERFIL DE USUARIO --- */
+.user-profile {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background: white;
+  padding: 0.35rem 0.5rem 0.35rem 0.35rem;
+  border-radius: 50px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+
+  .avatar {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #e5e7eb;
+  }
+
+  .btn-logout {
+    background: transparent;
+    border: none;
+    color: #ef4444; /* Rojo suave */
+    font-weight: 600;
+    font-size: 0.9rem;
+    cursor: pointer;
+    padding: 0.5rem 0.8rem;
+    border-radius: 20px;
+    transition: background 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+
+    &:hover {
+      background-color: #fee2e2;
+    }
+  }
+}
+
+/* --- LOGIN SCREEN --- */
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 60vh; /* Centrado vertical */
+}
+
+.login-card {
+  text-align: center;
+  max-width: 400px;
+  width: 100%;
+  padding: 3rem 2rem;
+  
+  .login-header {
+    margin-bottom: 2rem;
+    
+    .login-icon { font-size: 3rem; display: block; margin-bottom: 1rem; }
+    h2 { font-size: 1.8rem; margin: 0 0 0.5rem 0; color: #1f2937; }
+    p { color: #6b7280; margin: 0; }
+  }
+}
+
+/* --- BOTÓN DE GOOGLE ESTILIZADO --- */
+.btn-google {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  width: 100%;
+  background-color: white;
+  color: #3c4043;
+  border: 1px solid #dadce0;
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+
+  .google-logo {
+    width: 20px;
+    height: 20px;
+  }
+
+  &:hover {
+    background-color: #f8faff;
+    border-color: #d2e3fc;
+    box-shadow: 0 1px 3px rgba(66, 133, 244, 0.3);
+    color: #1a73e8;
+  }
+  
+  &:active {
+    background-color: #ecf3fe;
+  }
+}
+
+/* Animación de entrada suave */
+.main-content {
+  animation: fadeIn 0.5s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}

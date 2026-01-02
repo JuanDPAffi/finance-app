@@ -1,31 +1,40 @@
-<div class="container">
-  <h2>Nueva Transacción</h2>
+<div class="card-style form-container">
+  <div class="header">
+    <h2>Nueva Transacción</h2>
+    <span class="emoji-header">💸</span>
+  </div>
   
   <form (ngSubmit)="onSubmit()">
     
-    <div>
-      <label>Tipo:</label>
-      <select [(ngModel)]="model.type" name="type">
-        <option value="income">Ingreso 💰</option>
-        <option value="expense">Gasto 💸</option>
-      </select>
+    <div class="row">
+      <div class="form-group type-select">
+        <label>Tipo</label>
+        <div class="select-wrapper">
+          <select [(ngModel)]="model.type" name="type" [class.is-expense]="model.type === 'expense'">
+            <option value="income">Ingreso (+)</option>
+            <option value="expense">Gasto (-)</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group amount-input">
+        <label>Monto</label>
+        <input type="number" [(ngModel)]="model.amount" name="amount" placeholder="$0" required>
+      </div>
     </div>
 
-    <div>
-      <label>Monto:</label>
-      <input type="number" [(ngModel)]="model.amount" name="amount" placeholder="0.00" required>
+    <div class="form-group">
+      <label>Categoría</label>
+      <input type="text" [(ngModel)]="model.category" name="category" placeholder="Ej: Comida, Sueldo, Netflix">
     </div>
 
-    <div>
-      <label>Categoría:</label>
-      <input type="text" [(ngModel)]="model.category" name="category" placeholder="Ej: Casa, Supermercado">
+    <div class="form-group">
+      <label>Nota (Opcional)</label>
+      <input type="text" [(ngModel)]="model.description" name="description" placeholder="Detalles adicionales...">
     </div>
 
-    <div>
-      <label>Descripción:</label>
-      <input type="text" [(ngModel)]="model.description" name="description" placeholder="Detalles opcionales">
-    </div>
-
-    <button type="submit">Guardar Transacción</button>
+    <button type="submit" class="btn-save">
+      Guardar Movimiento
+    </button>
   </form>
 </div>

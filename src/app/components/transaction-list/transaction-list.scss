@@ -1,31 +1,84 @@
 .list-container {
-  margin-top: 2rem;
-  padding: 1rem;
-  border: 1px solid #ddd;
-  border-radius: 8px;
+  h3 {
+    margin-top: 0;
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+    color: #6b7280;
+  }
 }
 
-ul {
-  list-style: none;
-  padding: 0;
-}
-
-.transaction-item {
+.transactions-wrapper {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px;
-  border-bottom: 1px solid #eee;
+  flex-direction: column;
+  gap: 0.75rem;
+}
 
-  // Por defecto verde (ingreso)
-  border-left: 5px solid #2ecc71; 
-  
+.transaction-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid #f3f4f6;
+
+  &:last-child { border-bottom: none; }
+}
+
+.icon-indicator {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  background-color: #d1fae5; /* Verde claro por defecto */
+  margin-right: 1rem;
+
   &.expense {
-    // Si es gasto, rojo
-    border-left-color: #e74c3c; 
+    background-color: #fee2e2; /* Rojo claro */
+  }
+}
+
+.info {
+  flex: 1; /* Toma el espacio disponible */
+  display: flex;
+  flex-direction: column;
+
+  .category {
+    font-weight: 600;
+    color: #111827;
+  }
+
+  .date-desc {
+    font-size: 0.8rem;
+    color: #9ca3af;
   }
 }
 
 .amount {
-  font-weight: bold;
+  font-weight: 700;
+  color: #059669; /* Verde texto */
+  white-space: nowrap;
+
+  &.expense-text {
+    color: #dc2626; /* Rojo texto */
+  }
+}
+
+/* Estado Vacío */
+.empty-state {
+  text-align: center;
+  padding: 2rem 0;
+  color: #6b7280;
+
+  .empty-icon { font-size: 2rem; display: block; margin-bottom: 0.5rem; }
+  p { margin: 0; font-weight: 500; }
+  small { font-size: 0.85rem; }
+}
+
+/* Spinner de carga simple */
+.loading {
+  text-align: center;
+  padding: 1rem;
+  color: #6b7280;
 }
