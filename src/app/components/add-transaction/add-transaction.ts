@@ -19,7 +19,7 @@ export class AddTransactionComponent {
   model: Transaction = {
     amount: 0,
     type: 'expense', // Por defecto es gasto
-    category: 'Comida',
+    category: '',
     description: '',
     date: new Date()
   };
